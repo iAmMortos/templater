@@ -1,0 +1,98 @@
+html {
+	font-size: 100%;
+}
+
+body {
+	margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  font-family: Verdana;
+  margin: .5rem 0 0 0;
+  font-size: 1.2rem;
+  color: #5b0f00;
+  font-variant: small-caps;
+}
+
+hr {
+  border-top: .13rem solid #5b0f00
+}
+
+hr.thin {
+  border-top: .05rem solid #5b0f00;
+  margin: 0;
+}
+
+p {
+  font-family: Verdana;
+  margin: 0;
+}
+
+table {
+  font-size: .8rem;
+  font-family: Verdana;
+  width: 100%;
+  max-width: 100%;
+  margin-left: -.3rem;
+}
+
+.stat-block {
+  box-sizing: border-box;
+  padding: 5px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.stat-block-top {
+  color: #5b0f00;
+}
+
+.stat-line {
+  font-size: .8rem;
+  margin: .5rem 0;
+}
+
+.core-stat-title {
+  font-weight: bold;
+}
+
+.stat-title {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.attack-type {
+  font-style: italic;
+}
+
+.hit-text {
+  font-style: italic;
+}
+
+.scores-header {
+  font-size: .9rem;
+}
+
+.stat-scores {
+  text-align: center;
+}
+
+.stat-scores td {
+  padding: 0 .4rem;
+}
+
+.creature-name {
+  font-size: 2.5rem;
+  color: #5b0f00;
+  font-variant: small-caps;
+}
+
+.size-type-alignment, .source {
+  font-size: .7rem;
+  font-style: italic;
+}

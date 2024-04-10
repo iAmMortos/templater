@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<!-- <link rel="stylesheet" href="css/item_cards.css" media="screen"> -->
+	<!--<link rel="stylesheet" href="css/item_cards_print.css" media="screen">-->
+	<style>{css}</style>
+	<script>{js}</script>
+<style>
+
+</style>
+</head>
+
+<body>
+
+<input type="button" onclick="printDiv('front-page-print');" value="Print Front" />
+<input type="button" onclick="printDiv('back-page-print');" value="Print Back" />
+
+<div id="front-page-print">
+  <div id="front-page" class="page">
+    {items|temp:item_card|delimiter:\n}
+    
+    <div class="guide hguide hguide0"></div>
+    <div class="guide hguide hguide1"></div>
+    <div class="guide hguide hguide2"></div>
+    <div class="guide hguide hguide3"></div>
+    <div class="guide vguide vguide0"></div>
+    <div class="guide vguide vguide1"></div>
+    <div class="guide vguide vguide2"></div>
+    <div class="guide vguide vguide3"></div>
+  </div>
+</div>
+
+<div id="back-page-print">
+  <div id="back-page" class="page">
+    {items|temp:item_card_back|delimiter:\n}
+    
+    <div class="guide hguide hguide0"></div>
+    <div class="guide hguide hguide1"></div>
+    <div class="guide hguide hguide2"></div>
+    <div class="guide hguide hguide3"></div>
+    <div class="guide vguide vguide0"></div>
+    <div class="guide vguide vguide1"></div>
+    <div class="guide vguide vguide2"></div>
+    <div class="guide vguide vguide3"></div>
+  </div>
+</div>
+
+</body>
+
+</html>
