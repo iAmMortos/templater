@@ -1,20 +1,30 @@
 
+import os
+
 from templater.utils.properties_file import PropertiesFile
 from templater.utils.class_utils import fully_qualified_name
 from templater.template_manager import TemplateManager
 from templater.tokens.tokenizer import Tokenizer
+from templater.tokens.token_config import TokenConfig
 from templater.utils import obj_utils
 
 
 class Templater (object):
-  SELFREF = 'this'
   def __init__(self, output_type, token_config_path='templater/config/token.properties', template_config_path='templater/config/template.properties'):
+    self._token_config_path = token_config_path
+    _token_config_base =  os.path.dirname(token_config_path)
+    _specific_token_config_path = f'{_token_config_base}{os.sep}token.{output_type}.properties'
+    if (os.path.exists(_specific_token_config_path)):
+      self._token_config = TokenConfig(_specific_token_config_path)
+    else:
+      self._token_config = TokenConfig(token_config_path)
+        
     self.output_type = output_type
     self.template_manager = TemplateManager(self.output_type)
-    self.tokenizer = Tokenizer(token_config_path)
+    self.tokenizer = Tokenizer(self._token_config)
     self.template_properties = PropertiesFile(template_config_path)
 
-  def make(self, o, template_str=None):
+  def make(self, o, template_str=None, token_config_path=None):
     output = ''
     # If template_str is not provided, attempt to look up from class of given object
     template_name = template_str
@@ -24,7 +34,11 @@ class Templater (object):
       if not template_name:
         raise Exception(f"No valid template found for template [{template_name}]")
     template = self.template_manager.get_template(template_name)
-    tokens = self.tokenizer.tokenize(template)
+    
+    # if the user has passed a specific token config to the `make` function, load it and pass it along
+    #  to the tokenizer to use instead of the default token config.
+    token_config = self._token_config if not token_config_path else TokenConfig(token_config_path)
+    tokens = self.tokenizer.tokenize(template, token_config)
 
     pending_line_removal = False
     for token in tokens:
@@ -39,7 +53,7 @@ class Templater (object):
         token_strs = []  # The string return value the given token represents
         
         objs = []  # represent the object(s) receieved by doing a lookup on the token's reference
-        if token.valueref == Templater.SELFREF:
+        if token.valueref == token_config.token_self_ref_keyword:
           objs = [o]
         else:
           ob = obj_utils.get_value(o, token.valueref)

@@ -39,11 +39,11 @@ class PropertiesFile (object):
         value = '='.join(parts[1:])
         self.properties[key] = value
 
-  def get(self, key):
+  def get(self, key, default=None):
     if key in self.properties:
       return self.properties[key]
     else:
-      return None
+      return default
 
   def set(self, key, value):
     self.properties[key] = value
