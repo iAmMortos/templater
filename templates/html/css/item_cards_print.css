@@ -1,3 +1,9 @@
+html, body
+{
+  padding: 0;
+  margin: 0;
+}
+
 .guide
 {
   background-color: red;
@@ -27,52 +33,85 @@
 .vguide2{ left: 64.7059%; }
 .vguide3{ left: 94.1176%; }
 
-/*.page
-{
-  position: relative;
-  float: left;
-  margin: 10px;
-  width: 600px;
-  height: 840px;
-  padding: 20px 40px;
-  border: 1px solid black;
-}*/
-
 .card
 {
   position: relative;
   float: left;
-  width: 33.33333%;
-  height: 33.33333%;
+  width: 33.3333%;
+  height: 33.3333%;
   /* background-color: red; */
   border: 1px #ccc solid;
   margin: 0px;
-  padding: 0px;
+  padding: 1em;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-.card-back
+.card h1
 {
-  background-image: url("../rsc/card_back.png");
-  background-size: 100% 100%;
-}
-
-/*@media print {*/
-html, body {height:100%; width:100%; margin:0; padding:0;}
-
-@page {
-	size: letter portrait; /*2250px 3150px;*/
-	max-height: 100%;
-	max-width: 100%;
-}
-
-.page {
-	/* box-sizing: border-box; */
-  position: relative;
-  width: 2250px;
-  height: 3150px;
-  padding: 75px 150px; /*75px 150px;*/
-  border: 0; /*1px solid black;*/
+  font-size: 1.33em;
+  color: #600;
+  font-weight: bold;
   margin: 0;
 }
-/*}*/
+
+.card h6
+{
+  font-size: 1em;
+  color: #999;
+  font-style: italic;
+  margin: 0;
+}
+
+.card p
+{
+  font-size: 1em;
+  color: black;
+  margin: 0px;
+  text-indent: 1.33em;
+}
+
+.card .bg_img
+{
+  position: relative;
+  left: 0;
+  opacity: .3;
+  width: 100%;
+  z-index: -900;
+  position: absolute;
+  bottom: 0;
+}
+
+@media screen {
+  .page
+  {
+    position: relative;
+    float: left;
+    margin: 10px;
+    width: 600px;
+    height: 840px;
+    padding: 20px 40px;
+    border: 1px solid black;
+    font-size: 6px;
+  }
+}
+
+@media print {
+  @page {
+    size: 2550px 3300px;
+    image-resolution: 300dpi;
+  }
+  
+  .page
+  {
+    position: relative;
+    width: 2550px;
+    height: 3300px;
+    padding: 75px 150px;
+    page-break-after:always;
+    float: left;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-size: 25.5px;
+  }
+}

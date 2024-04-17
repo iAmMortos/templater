@@ -3,13 +3,18 @@
 <html>
 
 <head>
-	<!-- <link rel="stylesheet" href="css/item_cards.css" media="screen"> -->
-	<!--<link rel="stylesheet" href="css/item_cards_print.css" media="screen">-->
-	<style>{css}</style>
-	<script>{js}</script>
-<style>
-
-</style>
+  <!-- <link rel="stylesheet" href="css/item_cards.css" media="screen"> -->
+  <!--<link rel="stylesheet" href="css/item_cards_print.css" media="screen">-->
+  <style>
+  {css}
+  .card-back
+  {
+    float: right;
+    background-image: url("data:image/png;base64,{{card_back_data}}");
+    background-size: 100% 100%;
+  }
+  </style>
+<script>{js}</script>
 </head>
 
 <body>

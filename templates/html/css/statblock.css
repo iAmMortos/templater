@@ -46,6 +46,7 @@ table {
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 3px;
+  margin: 1em 0;
 }
 
 .stat-block-top {
