@@ -7,22 +7,71 @@
   <!--<link rel="stylesheet" href="css/item_cards_print.css" media="screen">-->
   <style>
   {css}
+  /*
   .card-back
   {
     float: right;
     background-image: url("data:image/png;base64,{{card_back_data}}");
     background-size: 100% 100%;
   }
+  */
+  
+  @page {
+            size: 8.5in 11in;
+            margin: 0.5in;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .print-button {
+            margin: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5in;
+            width: 7.5in;
+            margin: 0 auto;
+        }
+
+        .card {
+            width: 2.5in;
+            height: 3.5in;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 14px;
+            background: white;
+        }
+        
+        @media print {
+            .print-button { display: none; }
+            body { justify-content: flex-start; }
+        }
   </style>
 <script>{js}</script>
 </head>
 
 <body>
 
-<input type="button" onclick="printDiv('front-page-print');" value="Print Front" />
-<input type="button" onclick="printDiv('back-page-print');" value="Print Back" />
-
-<div id="front-page-print">
+<!--<input type="button" onclick="printDiv('front-page-print');" value="Print Front" />
+<input type="button" onclick="printDiv('back-page-print');" value="Print Back" /> -->
+<button class="print-button" onclick="window.print()">Print Cards</button>
+<div id="front-page-print card-container">
   <div id="front-page" class="page">
     {items|temp:item_card|delimiter:\n}
     
