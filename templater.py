@@ -2,7 +2,7 @@
 import os
 
 from templater.utils.properties_file import PropertiesFile
-from templater.utils.class_utils import fully_qualified_name
+from templater.utils.class_utils import short_name, fully_qualified_name
 from templater.template_manager import TemplateManager
 from templater.tokens.tokenizer import Tokenizer
 from templater.tokens.token_config import TokenConfig
@@ -10,7 +10,7 @@ from templater.utils import obj_utils
 
 
 class Templater (object):
-  def __init__(self, output_type, template_dir, token_config_path='templater/config/token.properties', template_config_path='templater/config/template.properties'):
+  def __init__(self, output_type, template_dir, template_config_path=None, token_config_path='templater/config/token.properties'):
     self._template_dir = template_dir
     self._token_config_path = token_config_path
     _token_config_base =  os.path.dirname(token_config_path)
@@ -30,10 +30,10 @@ class Templater (object):
     # If template_str is not provided, attempt to look up from class of given object
     template_name = template_str
     if not template_name:
-      obj_clazz = fully_qualified_name(o)
-      template_name = self.template_properties.get(obj_clazz)
-      if not template_name:
-        raise Exception(f"No valid template found for template [{template_name}]")
+      if self.template_properties.has(obj_clazz):
+        template_name = self.template_properties.get(fully_qualified_name(o))
+      else:
+        template_name = short_name(o).lower()
     template = self.template_manager.get_template(template_name)
     
     # if the user has passed a specific token config to the `make` function, load it and pass it along

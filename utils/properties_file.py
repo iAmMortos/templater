@@ -38,6 +38,9 @@ class PropertiesFile (object):
         key = parts[0]
         value = '='.join(parts[1:])
         self.properties[key] = value
+        
+  def has(self, key):
+    return key in self.properties
 
   def get(self, key, default=None):
     if key in self.properties:
