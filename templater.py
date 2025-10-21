@@ -10,7 +10,8 @@ from templater.utils import obj_utils
 
 
 class Templater (object):
-  def __init__(self, output_type, token_config_path='templater/config/token.properties', template_config_path='templater/config/template.properties'):
+  def __init__(self, output_type, template_dir, token_config_path='templater/config/token.properties', template_config_path='templater/config/template.properties'):
+    self._template_dir = template_dir
     self._token_config_path = token_config_path
     _token_config_base =  os.path.dirname(token_config_path)
     _specific_token_config_path = f'{_token_config_base}{os.sep}token.{output_type}.properties'
@@ -20,7 +21,7 @@ class Templater (object):
       self._token_config = TokenConfig(token_config_path)
         
     self.output_type = output_type
-    self.template_manager = TemplateManager(self.output_type)
+    self.template_manager = TemplateManager(self.output_type, template_dir=self._template_dir)
     self.tokenizer = Tokenizer(self._token_config)
     self.template_properties = PropertiesFile(template_config_path)
 
