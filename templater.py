@@ -29,9 +29,10 @@ class Templater (object):
     output = ''
     # If template_str is not provided, attempt to look up from class of given object
     template_name = template_str
+    obj_clazz = fully_qualified_name(o)
     if not template_name:
       if self.template_properties.has(obj_clazz):
-        template_name = self.template_properties.get(fully_qualified_name(o))
+        template_name = self.template_properties.get(obj_clazz)
       else:
         template_name = short_name(o).lower()
     template = self.template_manager.get_template(template_name)
