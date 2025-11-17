@@ -23,4 +23,4 @@ _{sta_txt}_
 {legendaries|optline|temp:action|delimiter:\n\n|prefix:---\n## Legendary Actions\n|suffix:\n}
 {mythics|optline|temp:action|delimiter:\n\n|prefix:---\n## Mythic Actions\n|suffix:\n}
 {lairs|optline|temp:action|delimiter:\n\n|prefix:---\n## Lairs\n|suffix:\n}
-
+{description|optline|prefix:---\n}
