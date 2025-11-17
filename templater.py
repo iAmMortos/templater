@@ -2,7 +2,7 @@
 import os
 
 from templater.utils.properties_file import PropertiesFile
-from templater.utils.class_utils import fully_qualified_name
+from templater.utils.class_utils import short_name, fully_qualified_name
 from templater.template_manager import TemplateManager
 from templater.tokens.tokenizer import Tokenizer
 from templater.tokens.token_config import TokenConfig
@@ -10,7 +10,8 @@ from templater.utils import obj_utils
 
 
 class Templater (object):
-  def __init__(self, output_type, token_config_path='templater/config/token.properties', template_config_path='templater/config/template.properties'):
+  def __init__(self, output_type, template_dir, template_config_path=None, token_config_path='templater/config/token.properties'):
+    self._template_dir = template_dir
     self._token_config_path = token_config_path
     _token_config_base =  os.path.dirname(token_config_path)
     _specific_token_config_path = f'{_token_config_base}{os.sep}token.{output_type}.properties'
@@ -20,7 +21,7 @@ class Templater (object):
       self._token_config = TokenConfig(token_config_path)
         
     self.output_type = output_type
-    self.template_manager = TemplateManager(self.output_type)
+    self.template_manager = TemplateManager(self.output_type, template_dir=self._template_dir)
     self.tokenizer = Tokenizer(self._token_config)
     self.template_properties = PropertiesFile(template_config_path)
 
@@ -28,11 +29,12 @@ class Templater (object):
     output = ''
     # If template_str is not provided, attempt to look up from class of given object
     template_name = template_str
+    obj_clazz = fully_qualified_name(o)
     if not template_name:
-      obj_clazz = fully_qualified_name(o)
-      template_name = self.template_properties.get(obj_clazz)
-      if not template_name:
-        raise Exception(f"No valid template found for template [{template_name}]")
+      if self.template_properties.has(obj_clazz):
+        template_name = self.template_properties.get(obj_clazz)
+      else:
+        template_name = short_name(o).lower()
     template = self.template_manager.get_template(template_name)
     
     # if the user has passed a specific token config to the `make` function, load it and pass it along
