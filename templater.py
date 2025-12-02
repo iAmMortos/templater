@@ -105,13 +105,3 @@ class Templater (object):
           output += v
         # otherwise, nothing to append, continue
     return output  # obj_utils.get_value(template, o)
-
-  '''
-  o - The object from which we're pulling our values
-  token - The token object from the tokenizer
-  output - The string we're appending to that will be returned by the "make" function
-  pending_line_removal - A boolean value to pass back and forth for this specific call of the "make" function. 
-    used to support the optline feature
-  '''
-#   def _handle_token_obj(self, o, token, output, pending_line_removal):
-        
